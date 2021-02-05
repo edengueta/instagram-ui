@@ -1,0 +1,14 @@
+.Header {
+    box-shadow: #00000010 0 10px 50px;
+    background-color: white;
+    height: 80px ;
+
+    .logo{
+        width: 140px;
+        padding: 10px;
+        transition: all 0.3s ease-in-out;
+        &:hover{
+            transform: scale(1.05,1.05);
+        }
+    }
+}

@@ -1,0 +1,12 @@
+.App {
+    height: 100vh;
+    .register-wrapper{
+        height: calc(100vh - 80px);
+        padding-top: 25px;
+        background-image:url("./bg.jpg");
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-size: cover; 
+    }
+}
+
