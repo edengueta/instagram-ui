@@ -62,7 +62,7 @@ function Login() {
                         </div>
                     </Form>
                 </Formik>
-                <p className="formOptions">Create you account <Link to="/register">here</Link></p>    
+                <p className="formOptions">Create your account <Link to="/register">here</Link></p>    
             </div>
         </Welcome>
     );
