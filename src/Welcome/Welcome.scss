@@ -1,9 +1,21 @@
-.Register {
-    background-color:rgba(255, 255, 255, 1);
+.bg{
+    height: calc(100vh - 80px);
+    padding: 25px 15px;
+    background-image:url("./bg.jpg");
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+    position: relative;
+    // z-index: -1;
+}
+
+.formBox {
+    background-color: white;
     border: 1px solid #efefef;
     padding: 25px;
     border-radius: 5px;
     max-width: 500px;
+
 
     h4 {
         text-align: center;
@@ -31,12 +43,21 @@
         transition: all 0.3s ease-in-out;   
     }
 
-    .btn-register {
+    .btn {
         cursor: pointer;
         background-color: #fb3b88;
         color: white;
+
         &:hover {
             background-color: #e9377e;
+        }
+    }
+    .formOptions {
+        font-size: 14px;
+        text-align: center;
+        margin: 0;
+        a {
+            color: #ff75ac;
         }
     }
 }
