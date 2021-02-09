@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Login.scss'
 import Welcome from '../Welcome';
 import {  Field, Form, Formik } from 'formik';
-import { BiUser, BiLockAlt } from 'react-icons/bi';
+import { BiUser, BiLockAlt, BiHide, BiShow  } from 'react-icons/bi';
 import {loginSchema} from './login.schema'
 import { Link,useHistory } from 'react-router-dom';
 
@@ -11,7 +11,13 @@ import { Link,useHistory } from 'react-router-dom';
 function Login() {
     const initialValues = {username:'',password:''};
     const [showError, setShowError]= useState(false);
+    const [showPass, setShowPass]= useState(false);
     const history = useHistory();
+
+    const toggle = {
+        show : ()=> setShowPass(true),
+        hide : ()=> setShowPass(false),
+    }
 
 
     function submit(values) {
@@ -54,8 +60,11 @@ function Login() {
                             <label htmlFor="password" className="form-label">Password</label>
                             <div className="input-group">
                                 <span className="input-group-text"><BiLockAlt /></span>
-                                <Field type="password" name="password"className="form-control" id="password" placeholder="Password"/>
+                                <Field type={!showPass ? "password" :"text"} name="password"className="form-control" id="password" placeholder="Password"/>
                             </div>
+                            <span onPointerDown={toggle.show} onPointerUp={toggle.hide} onPointerLeave={toggle.hide} className="passwordToggle">
+                                {!showPass ? <BiShow />:<BiHide />}
+                            </span>
                         </div>
                         <div className="mb-4 d-grid col-6 mx-auto">
                             <button type="submit" className="btn btn-register">Login</button>
