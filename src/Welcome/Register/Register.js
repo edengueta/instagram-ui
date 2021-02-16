@@ -5,7 +5,8 @@ import {registerSchema} from './register.schema'
 import Welcome from '../Welcome';
 import { Link, useHistory } from 'react-router-dom';
 import { UserService } from '../../services/user.service';
-import borat from '../borat_icon.svg';
+import borat from '../images/borat_icon.svg';
+import './Register.scss';
 
 
 function Register() {
@@ -32,7 +33,7 @@ function Register() {
                     initialValues={initialValues}
                     validationSchema={registerSchema}
                     onSubmit ={submit}>
-                    <Form className="Form row">
+                    <Form autocomplete="off" className="Form row">
                         <div className="mb-3 input-group">
                             <label htmlFor="username" className="form-label">Username</label>
                             <div className="input-group">
@@ -46,7 +47,7 @@ function Register() {
                             <label htmlFor="password" className="form-label">Password</label>
                             <div className="input-group">
                                 <span className="input-group-text"><BiLockAlt /></span>
-                                <Field type="password" name="password"className="form-control" id="password" placeholder="Password"/>
+                                <Field type="password" autocomplete="new-password" name="password" className="form-control" id="password" placeholder="Password"/>
                             </div>
                             <ErrorMessage className="ErrorMessage" name="password" component="span"/>
                         </div>
@@ -55,18 +56,18 @@ function Register() {
                             <label htmlFor="email" className="form-label">Email address</label>
                             <div className="input-group">
                                 <span className="input-group-text"><BiAt /></span>
-                                <Field type="email" name="email" className="form-control" id="email" placeholder="name@example.com"/>
+                                <Field type="email" autocomplete="nope" name="email" className="form-control" id="email" placeholder="name@example.com"/>
                             </div>
                             <ErrorMessage className="ErrorMessage" name="email" component="span"/>
                         </div>
 
                         <div className="mb-4">
                             { showSuccess
-                                        ? <div className="alert alert-success Register__success text-center">
-                                            <img className="borat" src={borat} alt="borat-icon"/>
-                                            <b>"VERY NICE! GREATE SUCCESS!"</b>
-                                          </div>
-                                        :  <button type="submit" className="btn d-grid col-6 mx-auto">Register</button>
+                                ? <div className="alert alert-success Register__success text-center">
+                                    <img className="borat" src={borat} alt="borat-icon"/>
+                                    <b>"VERY NICE! GREATE SUCCESS!"</b>
+                                    </div>
+                                :  <button type="submit" className="btn d-grid col-6 mx-auto">Register</button>
                             }
                            
                         </div>
