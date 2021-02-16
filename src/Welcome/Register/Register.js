@@ -1,31 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { BiUser, BiLockAlt, BiAt } from 'react-icons/bi';
 import {registerSchema} from './register.schema'
 import Welcome from '../Welcome';
 import { Link, useHistory } from 'react-router-dom';
+import { UserService } from '../../services/user.service';
+import borat from '../borat_icon.svg';
 
 
 function Register() {
     const initialValues = {username:'',email:'',password:'',agreeToTerms:false};
-
+    const [showSuccess,setSuccess]= useState(false);
     const history = useHistory();
 
-    function submit(values) {
-        fetch ('http://localhost:4000/user', {
-            method: 'PUT',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify(values)
-        }).then(res => {
+    async function submit(values) {
+		const res = await UserService.create(values)
             if (res.status === 201) {
-                history.push('/login');
-                return
+                setSuccess(true);
+                setTimeout(() => history.push('/login'), 2000);
+                return;
             }
-            console.log ('Failure');
-        });
-    }    
+            console.log('failure!!!');
+	}
+
 
     return (
         <Welcome>
@@ -63,8 +60,15 @@ function Register() {
                             <ErrorMessage className="ErrorMessage" name="email" component="span"/>
                         </div>
 
-                        <div className="mb-4 d-grid col-6 mx-auto">
-                            <button type="submit" className="btn">Register</button>
+                        <div className="mb-4">
+                            { showSuccess
+                                        ? <div className="alert alert-success Register__success text-center">
+                                            <img className="borat" src={borat} alt="borat-icon"/>
+                                            <b>"VERY NICE! GREATE SUCCESS!"</b>
+                                          </div>
+                                        :  <button type="submit" className="btn d-grid col-6 mx-auto">Register</button>
+                            }
+                           
                         </div>
                     </Form>
                 </Formik>

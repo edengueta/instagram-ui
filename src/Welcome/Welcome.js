@@ -6,8 +6,7 @@ function Welcome(props) {
     return (
         <div className="bg">
             {props.children}
-
-            {/* <FloatingCircles/> */}
+            {<FloatingCircles/>}
         </div>
     );
 }

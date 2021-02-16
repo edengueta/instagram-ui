@@ -2,6 +2,8 @@
     box-shadow: #00000010 0 10px 50px;
     background-color: white;
     height: 80px ;
+    position: relative;
+    z-index: 2;
 
     .logo{
         width: 140px;

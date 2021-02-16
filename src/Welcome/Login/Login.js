@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import './Login.scss'
-import Welcome from '../Welcome';
 import {  Field, Form, Formik } from 'formik';
 import { BiUser, BiLockAlt, BiHide, BiShow  } from 'react-icons/bi';
-import {loginSchema} from './login.schema'
+import Cookies from 'js-cookie';
 import { Link,useHistory } from 'react-router-dom';
+
+import {loginSchema} from './login.schema'
+import Welcome from '../Welcome'; 
+import './Login.scss'
+import { UserService } from '../../services/user.service';
 
 
 
@@ -19,22 +22,18 @@ function Login() {
         hide : ()=> setShowPass(false),
     }
 
-
-    function submit(values) {
-        fetch ('http://localhost:4000/user/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify(values)
-        }).then(res => {
-            if (res.status === 200) {
-                history.push('/');
-                return
-            }
-            setShowError(true);
-        });
-    }    
+    async function submit(values) {
+		setShowError(false);
+		const res = await UserService.login(values)
+			if (res.status === 200) {
+				const json = await res.json()
+					Cookies.set('insta-user', json.token, { expires: 30 });
+					history.push('/');
+			        return;
+			}
+			setShowError(true);
+	}
+  
 
     return (
         <Welcome>
@@ -66,8 +65,8 @@ function Login() {
                                 {!showPass ? <BiShow />:<BiHide />}
                             </span>
                         </div>
-                        <div className="mb-4 d-grid col-6 mx-auto">
-                            <button type="submit" className="btn btn-register">Login</button>
+                        <div className="mb-4">
+                            <button type="submit" className="btn d-grid col-6 mx-auto">Login</button>
                         </div>
                     </Form>
                 </Formik>
