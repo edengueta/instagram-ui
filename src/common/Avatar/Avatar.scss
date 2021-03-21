@@ -1,0 +1,29 @@
+$lg-avatar: 200px;
+$md-avatar: 40px;
+$sm-avatar: 25px;
+
+.Avatar {
+    box-sizing: content-box;
+    border-radius: 50%;
+}
+.avatarLink{
+    width: auto;
+}
+
+.avatar-lg {
+    width: $lg-avatar;
+    height: $lg-avatar;
+    
+    @media (max-width: 735px) {
+        width: 100px;
+        height: 100px; 
+    }
+}
+.avatar-md {
+    width: $md-avatar;
+    height: $md-avatar;
+}
+.avatar-sm {
+    width: $sm-avatar;
+    height: $sm-avatar;
+}

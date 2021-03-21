@@ -1,14 +1,25 @@
 .Header {
     box-shadow: #00000010 0 10px 50px;
     background-color: white;
-    height: 80px ;
-    position: relative;
-    z-index: 2;
+    height: 55px;
+    position: sticky;
+    top: -1px;
+    left: 0;
+    right: 0;
+    z-index: 3;
+
+    
+    a{
+        color: rgb(38, 38, 38);
+        &:hover, &:focus {
+            color: #fb3b88;
+        }
+    }
 
     .logo{
-        width: 140px;
-        padding: 10px;
+        height: 40px;
         transition: all 0.3s ease-in-out;
+
         &:hover{
             transform: scale(1.05,1.05);
         }

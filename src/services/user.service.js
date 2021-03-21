@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import environment from '../environments/index';
 
 export class UserService {
 
@@ -7,7 +8,7 @@ export class UserService {
 	}
 
 	static async me() {
-		const res= await fetch('http://localhost:4000/user/me', {
+		const res= await fetch(environment.apiUrl + '/user/me', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -21,7 +22,7 @@ export class UserService {
 	}
 
 	static async create(data) {
-		return await fetch('http://localhost:4000/user', {
+		return await fetch(environment.apiUrl + '/user', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
@@ -31,12 +32,67 @@ export class UserService {
 	}
 
 	static async login(credentials) {
-		return await fetch('http://localhost:4000/user/login', {
+		return await fetch(environment.apiUrl + '/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(credentials)
+		});
+	}
+
+	static async get(username) {
+		const res = await fetch(environment.apiUrl + '/user/' + username , {
+			headers: {
+                 Authorization: UserService.getToken(),
+			},
+		});
+		return res.json();
+	}
+
+	static async getPosts(username) {
+		const res = await fetch(environment.apiUrl + '/user/' + username+ '/posts' , {
+			headers: {
+                 Authorization: UserService.getToken(),
+			},
+		});
+		return res.json();
+	}
+
+	static async search(username) {
+		const res = await fetch(environment.apiUrl + '/user/?username=' + username , {
+			headers: {
+                 Authorization: UserService.getToken(),
+			},
+		});
+		return res.json();
+	}
+
+	static async isFollow(userId){
+		const res = await fetch (environment.apiUrl + '/user/'+ userId +'/follow', {
+			headers: {
+                 Authorization: UserService.getToken(),
+			}
+		});
+		return res.json();
+	}
+	
+	static async follow(userId){
+		const res = await fetch (environment.apiUrl + '/user/'+ userId +'/follow', {
+            method: 'POST',
+			headers: {
+                 Authorization: UserService.getToken(),
+			}
+		});
+		return res.json();
+	}
+
+	static async unfollow(userId){
+		const res = await fetch (environment.apiUrl + '/user/'+ userId +'/unfollow', {
+            method: 'POST',
+			headers: {
+                 Authorization: UserService.getToken(),
+			}
 		});
 	}
 }

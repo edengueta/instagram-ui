@@ -1,0 +1,31 @@
+.ProfileHeader {
+        padding: 3rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .profile-image {
+            grid-row: 1 / -1;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+
+            .profile-username {
+                font-size: 2.3rem;
+                font-weight: 300;
+                @media (max-width: 735px) {
+                    font-size: 1.5rem;
+                }
+            }
+ 
+        } 
+        .profile-numbers {
+            .numbers{
+                font-weight: 800;  
+            }
+        } 
+
+
+}

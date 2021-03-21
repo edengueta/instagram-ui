@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {  Field, Form, Formik } from 'formik';
 import { BiUser, BiLockAlt, BiHide, BiShow  } from 'react-icons/bi';
 import Cookies from 'js-cookie';
@@ -7,14 +7,16 @@ import { Link,useHistory } from 'react-router-dom';
 import {loginSchema} from './login.schema'
 import Welcome from '../Welcome'; 
 import './Login.scss'
+import logo from '../images/logo-circle.svg';
 import { UserService } from '../../services/user.service';
-
+import { UserContext } from '../../user-context';
 
 
 function Login() {
     const initialValues = {username:'',password:''};
     const [showError, setShowError]= useState(false);
     const [showPass, setShowPass]= useState(false);
+    const {setUser} = useContext(UserContext);
     const history = useHistory();
 
     const toggle = {
@@ -24,24 +26,33 @@ function Login() {
 
     async function submit(values) {
 		setShowError(false);
-		const res = await UserService.login(values)
-			if (res.status === 200) {
-				const json = await res.json()
-					Cookies.set('insta-user', json.token, { expires: 30 });
-					history.push('/');
-			        return;
-			}
-			setShowError(true);
+
+		const res = await UserService.login(values);
+        if (res.status !== 200) {
+            setShowError(true);
+            return;
+        }
+
+        const json = await res.json();
+        Cookies.set('insta-user', json.token, { expires: 30 });
+
+        const user = await UserService.me();
+        setUser(user);
+        history.push('/');
 	}
   
 
     return (
         <Welcome>
-                <div className="formBox container">
-                <h4>Login</h4>
-                {showError && <div className="alert alert-danger">
-                    Incorrect username or password
-                </div> }
+                <div className="form-box mx-auto">
+                    <div className='logo-wrapper mx-auto'>
+                        <img src={logo} alt="logo-insta" className="logo "/>
+                        <h4>Login</h4>        
+                    </div>
+                    {showError &&
+                    <div className="alert alert-danger">
+                        Incorrect username or password
+                    </div> }
                 <Formik
                     initialValues={initialValues}
                     validationSchema={loginSchema}
@@ -55,7 +66,7 @@ function Login() {
                             </div>
                         </div>
 
-                        <div className="mb-3 input-group">
+                        <div className="mb-3 input-group toggleParent">
                             <label htmlFor="password" className="form-label">Password</label>
                             <div className="input-group">
                                 <span className="input-group-text"><BiLockAlt /></span>

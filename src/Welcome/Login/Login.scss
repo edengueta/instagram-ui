@@ -1,4 +1,4 @@
-.passwordToggle {
+span.passwordToggle.passwordToggle {
     position: absolute;
     right: 25px;
     bottom: 5px;
@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
     transition: all ease-in-out 0.2s;
-    border-radius: 50% !important;
+    border-radius: 50%;
 
     &:hover {
         cursor: pointer;

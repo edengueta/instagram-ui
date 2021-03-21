@@ -1,5 +1,5 @@
 .bg{
-    height: calc(100vh - 80px);
+    height: 100vh;
     padding: 25px 15px;
     background-image:url("./images/bg.jpg");
     background-position: center; 
@@ -9,18 +9,28 @@
     z-index: 0;
 }
 
-.formBox {
+.form-box {
     background-color: white;
     border: 1px solid #efefef;
     padding: 25px;
-    border-radius: 5px;
+    border-radius: 4px;
     max-width: 500px;
     position: relative;
     z-index: 2;
 
+    .logo-wrapper{
+        width: 50%;
+        margin: 20px 0;
+    }
+
+    .logo {
+        position: relative;
+        left: 14px;
+    }
 
     h4 {
         text-align: center;
+        color: rgb(226, 226, 226);
     }
     input{
         background-color: rgb(248, 248, 248);

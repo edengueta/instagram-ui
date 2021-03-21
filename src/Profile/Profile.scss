@@ -1,0 +1,13 @@
+.Profile{
+    .gallery {
+        margin: 30px 0 ;
+        display: grid;
+        grid-template-columns: (repeat( 3, minmax(30%, 1fr)) );
+        grid-gap: 1.5rem;
+        width: auto;
+        transition: 0.2s all ease-in-out;
+        @media (max-width: 735px) {
+            grid-gap: 0.5rem;
+        }
+    }
+}

@@ -1,0 +1,50 @@
+.Post {
+    width: fit-content;
+    background-color: white;
+    margin: 25px 0;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    position: relative;
+
+    .username{
+        font-weight: 600;
+    }
+    .header {
+        margin: 10px;
+        font-weight: 300;
+    }
+    .image-wrapper {
+        width: 600px;
+        height: 600px; 
+        border: 1px solid #eeeeee;
+        border-left: none;
+        border-right: none;
+        transition: all 0.2s ease-out;
+
+        @media (max-width: 610px) {
+            width: 90vw;
+            height: 90vw; 
+        }
+        .image {
+            height: 100%;
+            width: 100%; 
+            object-fit: cover;
+            object-position: center center;
+        } 
+    }
+    .footer {
+        padding: 1rem;
+
+        .caption {
+            font-weight: 300;
+        }
+        a {
+            text-decoration: none;
+        }
+        .date {
+            font-size: 0.8em;
+            color: rgb(189, 189, 189);
+        }
+    }
+
+}

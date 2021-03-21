@@ -3,6 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { BiUser, BiLockAlt, BiAt } from 'react-icons/bi';
 import {registerSchema} from './register.schema'
 import Welcome from '../Welcome';
+import logo from '../images/logo-circle.svg';
 import { Link, useHistory } from 'react-router-dom';
 import { UserService } from '../../services/user.service';
 import borat from '../images/borat_icon.svg';
@@ -27,13 +28,16 @@ function Register() {
 
     return (
         <Welcome>
-            <div className="formBox container">
-                <h4>Sign up to see photos and videos from your friends.</h4>
+            <div className="form-box mx-auto">
+                <div className='logo-wrapper mx-auto'>
+                    <img src={logo} alt="logo-insta" className="logo "/>
+                    <h4>Register</h4>        
+                </div>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={registerSchema}
                     onSubmit ={submit}>
-                    <Form autocomplete="off" className="Form row">
+                    <Form autoComplete="off" className="Form row">
                         <div className="mb-3 input-group">
                             <label htmlFor="username" className="form-label">Username</label>
                             <div className="input-group">
@@ -47,7 +51,7 @@ function Register() {
                             <label htmlFor="password" className="form-label">Password</label>
                             <div className="input-group">
                                 <span className="input-group-text"><BiLockAlt /></span>
-                                <Field type="password" autocomplete="new-password" name="password" className="form-control" id="password" placeholder="Password"/>
+                                <Field type="password" autoComplete="new-password" name="password" className="form-control" id="password" placeholder="Password"/>
                             </div>
                             <ErrorMessage className="ErrorMessage" name="password" component="span"/>
                         </div>
@@ -56,7 +60,7 @@ function Register() {
                             <label htmlFor="email" className="form-label">Email address</label>
                             <div className="input-group">
                                 <span className="input-group-text"><BiAt /></span>
-                                <Field type="email" autocomplete="nope" name="email" className="form-control" id="email" placeholder="name@example.com"/>
+                                <Field type="email" autoComplete="nope" name="email" className="form-control" id="email" placeholder="name@example.com"/>
                             </div>
                             <ErrorMessage className="ErrorMessage" name="email" component="span"/>
                         </div>

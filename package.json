@@ -9,9 +9,13 @@
     "bootstrap": "^5.0.0-beta1",
     "formik": "^2.2.6",
     "js-cookie": "^2.2.1",
+    "moment": "^2.29.1",
     "react": "^17.0.1",
+    "react-cropper": "^2.1.7",
     "react-dom": "^17.0.1",
+    "react-easy-crop": "^3.3.2",
     "react-icons": "^4.1.0",
+    "react-moment": "^1.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4",
@@ -42,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "node-sass": "^4.14.1"
+    "node-sass": "^4.14.1",
+    "prop-types": "^15.7.2"
   }
 }

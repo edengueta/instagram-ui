@@ -1,0 +1,9 @@
+.navbar-nav {
+    margin-left: auto;
+    flex-direction: row;
+
+    .navbar-item {
+        font-size: 1.8rem;
+        margin: 0 0 0 10px;
+    }
+}

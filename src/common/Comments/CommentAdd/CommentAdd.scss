@@ -1,0 +1,38 @@
+.CommentAdd {
+    border-bottom: 1px solid #eeeeee;
+    padding: 0.5rem 1rem;
+    background-color: rgb(243, 243, 243);
+    position: sticky;
+    top: 0;
+    margin-bottom: 20px;
+    
+
+    form {
+        display: flex;
+        align-items: center;
+        .icon {
+            font-size: 23px;
+            padding-top: 3px;
+            margin-right:10px ;
+        }
+        textarea{
+            background: none;
+            border: none;
+            // border-bottom: 1px solid rgb(175, 175, 175);
+            outline:none;
+            overflow: hidden;
+            resize: none;
+            height: 2rem;
+            line-height: 2rem;
+            width: 100%;
+            margin-right: 5%;
+
+        }
+        .btn{
+            color:#fb3b88 ;
+            margin-left: auto;
+            padding: 0;
+            
+        }
+    }
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Post from './Post/Post';
 import { PostService } from '../services/post.service';
 import './Feed.scss'
 
@@ -8,7 +9,7 @@ const [posts,setPosts]= useState([])
     useEffect(() => {
 
         async function getPosts() {
-            const posts = await PostService.feed()
+            const posts = await PostService.feed();
             setPosts(posts);
         }
         getPosts();
@@ -16,9 +17,13 @@ const [posts,setPosts]= useState([])
     },[])
 
     return (
-        <div>
-            Feed:
-            {posts}
+        <div className='Feed'>
+            {
+                posts.map(post => {
+                    return <Post data={post} key={post._id}/>
+                })
+            }
+
         </div>
     );
 }
