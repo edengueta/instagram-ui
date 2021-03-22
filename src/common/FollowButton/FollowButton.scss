@@ -11,8 +11,10 @@
     .follow-btn {
         background-color:$base-color;
         color: white;
+        &:hover{
+           background-color: darken($base-color, 10%);
+        }
       
-
     }
     .unfollow-btn {
         background-color: none;

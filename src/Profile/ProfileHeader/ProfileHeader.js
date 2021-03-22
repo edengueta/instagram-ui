@@ -8,7 +8,7 @@ import FollowButton from '../../common/FollowButton/FollowButton';
 function ProfileHeader({ username, postsCount}) {
 
     const[user, setUser]= useState({})
-
+    const[followers, setFollowers]=useState([])
 
     useEffect ( ()=> {
 
@@ -16,6 +16,7 @@ function ProfileHeader({ username, postsCount}) {
             try {
                 const user= await UserService.get(username);
                 setUser(user);
+                setFollowers(user.followers);
 
             } catch(err) {
                 console.log(err)
@@ -31,10 +32,11 @@ function ProfileHeader({ username, postsCount}) {
             <div className="profile-info">
                 <h2 className="profile-username">{user.username}</h2>
                 <div className="profile-numbers">
-                    <p><span className="numbers">{postsCount}</span> posts</p>    
+                    <p><span className="numbers">{postsCount}</span> posts</p>
+                    <p><span className="numbers">{followers.length}</span> followers</p>    
                 </div>
             </div>
-            <FollowButton userId={user._id}/>
+            <FollowButton setFollowers={setFollowers} userId={user._id} followers={followers}/>
         </div>
     );
 }

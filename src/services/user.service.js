@@ -67,15 +67,6 @@ export class UserService {
 		});
 		return res.json();
 	}
-
-	static async isFollow(userId){
-		const res = await fetch (environment.apiUrl + '/user/'+ userId +'/follow', {
-			headers: {
-                 Authorization: UserService.getToken(),
-			}
-		});
-		return res.json();
-	}
 	
 	static async follow(userId){
 		const res = await fetch (environment.apiUrl + '/user/'+ userId +'/follow', {
@@ -94,5 +85,6 @@ export class UserService {
                  Authorization: UserService.getToken(),
 			}
 		});
+		return res.json();
 	}
 }

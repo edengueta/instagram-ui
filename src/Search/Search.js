@@ -40,7 +40,7 @@ function Search() {
             <input autoFocus placeholder="Type name..." className="search-input" onChange={(e)=> setQuery(e.target.value)}/>
             <div className="results">
                 {headlinGenerator()}
-                { result.map (user => ( <SearchResult key={user._id} user={user}/> )) }
+                { result.map (user => ( <SearchResult key={user._id} data={user}/> )) }
             </div>
 
         </div>
