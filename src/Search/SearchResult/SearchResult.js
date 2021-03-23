@@ -25,13 +25,11 @@ function SearchResult({data}) {
         <div className="SearchResult">
             <Link to={"/profile/" + data.username}>
                 <div className={`user-result ${isOwnProfile() && "own-user"}`}>
+                    <p className="date">Signed up <Moment fromNow>{data.createdAt}</Moment></p>
                     <Avatar size="md" image={data.avatar} link={data.username}/>
                     <Username className="mx-2" username={data.username}/>
                     <p className="bio">{data.bio}</p>     
-                    <p className="date">Signed up <Moment fromNow>{data.createdAt}</Moment> </p>
-                    <div className="follow-btn">
-                        <FollowButton userId={data._id} followers={data.followers}/>
-                    </div>
+                    <FollowButton userId={data._id} followers={data.followers}/>
                 </div>
             </Link>
 

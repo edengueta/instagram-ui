@@ -1,11 +1,15 @@
 .FollowButton {
     $base-color: #fb3b88;
+    position: absolute;
+    bottom: 15px;
     
     .btn {
-        min-width: 120px;
-        min-height: 32px;
+        width: 120px;
+        margin-top: 5px;
+        height: 35px;
         padding: 3px 20px;
         transition: all 0.3s ease-in-out;
+        box-sizing: border-box;
 
     }
     .follow-btn {

@@ -31,7 +31,7 @@ function PostPage() {
                 }
                 history.push('/')
             } catch (err){
-                console.log('something went wrong please try again')
+                console.log('something went wrong please try again');
             }
         }
         getPost();
@@ -41,9 +41,9 @@ function PostPage() {
     function onScroll(e){
         if (e.target.scrollTop > 10) {
             setFade (false);
-            return
+            return;
         }
-        setFade (true)
+        setFade (true);
     }
 
     return (

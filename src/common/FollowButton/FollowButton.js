@@ -8,14 +8,12 @@ import './FollowButton.scss';
 function FollowButton({userId ,followers, setFollowers}) {
 
     const { user } = useContext( UserContext );
-    const ownUserId= user._id;
     const[isFollow, setFollow]= useState(false);
 
     useEffect ( ()=> {
-                setFollow ( followers.includes(ownUserId) );
-                console.log("---did set---" + isFollow );
+                setFollow ( followers.includes(user._id) );
 
-    },[followers]);
+    },[followers,user]);
 
 
     async function toggleFollow() {
@@ -23,8 +21,8 @@ function FollowButton({userId ,followers, setFollowers}) {
         try{
             if (!isFollow) {
                 const user = await UserService.follow(userId);
-                setFollowers(user.followers);
                 setFollow(true);   
+                setFollowers(user.followers);
 
                 return
             }
@@ -38,19 +36,17 @@ function FollowButton({userId ,followers, setFollowers}) {
     }
 
     function isOwnProfile(){
-        if (ownUserId !== userId) {
+        if (user._id !== userId) {
             return false
         }
         return true
     }
-    return (<> { !isOwnProfile() &&
+    return (<> { !isOwnProfile() && 
         
                     <div className="FollowButton">
-                        {
-                            
+                        { 
                             <button onClick={toggleFollow} className={ `btn ${!isFollow ? "follow-btn" : "unfollow-btn"}` }>
                                 {!isFollow ? "Follow" : "Unfollow"}
-                                {console.log("---render--- state- " + isFollow +". includes: " + followers.includes(ownUserId) + followers.length)}
                             </button>
                         }
                     </div>

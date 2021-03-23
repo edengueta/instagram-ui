@@ -1,22 +1,23 @@
 .SearchResult{
     position: relative;
-
+    
     a {
         text-decoration: none;
     }
     .date {
         font-size: 0.8em;
         color: rgb(189, 189, 189);
-        margin-bottom: auto;
     } 
 
     .user-result{
-        min-height: 150px;
+        min-height: 185px;
         background-color: white;
         border: 1px solid #dbdbdb;
         border-radius: 3px;
         padding:20px;
         transition: all 0.3s ease-in-out;
+        overflow: hidden;
+
         &:hover {
             background-color: rgb(243, 243, 243);
             transform: translate(0,3px);
@@ -30,15 +31,16 @@
         .bio {
             color: black;
             margin-top: 5px;
+            font-size: 14px;
+            white-space: nowrap; 
+            width: 90%; 
+            overflow: hidden;
+            text-overflow: ellipsis; 
+
         }
-        .follow-btn {
-            margin-top: 20px;
-        }
-    
     }
     .own-user{
         background-color: rgb(243, 243, 243);
     }
-
 
 }
