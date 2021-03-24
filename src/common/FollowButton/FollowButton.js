@@ -4,7 +4,6 @@ import { UserContext } from '../../user-context';
 
 import './FollowButton.scss';
 
-
 function FollowButton({userId ,followers, setFollowers}) {
 
     const { user } = useContext( UserContext );

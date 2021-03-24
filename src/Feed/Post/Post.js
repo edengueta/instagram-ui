@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './Post.scss'
 import Avatar from '../../common/Avatar/Avatar';
-import Moment from 'react-moment';
-import { Link } from 'react-router-dom';
 import Username from '../../common/Username/Username';
 import PostLike from '../../common/PostLike/PostLike';
+import CreatedAt from '../../common/CreatedAt/CreatedAt';
 
 
 
@@ -42,7 +41,6 @@ function Post({data}) {
                     <Avatar size="md" image={data.user.avatar} link={data.user.username}/>
                     <div className="col-10">
                         <Username username={data.user.username}/>
-                        <div>location</div>                    
                     </div>
                 </div>
                 <div onDoubleClick={onDoubleClick} onTouchEnd={checkDoubleTap} className="image-wrapper">
@@ -52,14 +50,12 @@ function Post({data}) {
                 <div className="footer">
                     { data.caption &&
                         <p className="caption">
-                            <span className="username">{data.user.username} </span>
-                            {data.caption}
+                            <Username username={data.user.username}/>
+                            {" " +data.caption}
                         </p>
                     }
                     <PostLike postId={data._id} likesCount={data.likes.length} />
-                    <Link to={"/post/"+data._id}>
-                        <Moment className="date" fromNow>{data.createdAt}</Moment>
-                    </Link>
+                    <CreatedAt link={"/post/"+data._id} date={data.createdAt}/>
                 </div>
             </article>
     );

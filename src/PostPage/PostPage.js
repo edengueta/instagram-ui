@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { BiCommentDetail } from 'react-icons/bi';
 import { useHistory, useParams } from 'react-router-dom';
 import Avatar from '../common/Avatar/Avatar';
 import Comments from '../common/Comments/Comments';
@@ -7,7 +7,7 @@ import CreatedAt from '../common/CreatedAt/CreatedAt';
 import PostLike from '../common/PostLike/PostLike';
 import Username from '../common/Username/Username';
 import { PostService } from '../services/post.service';
-import { BiArrowToBottom } from "react-icons/bi";
+
 
 import './PostPage.scss';
 
@@ -16,8 +16,8 @@ function PostPage() {
     const {id} = useParams();
     const history = useHistory();
     const [post,setPost] = useState(null);
-    const [isFade,setFade] = useState(true);
-
+    // const [isFade,setFade] = useState(true);
+    const [commentsCount, setCommentsCount]=useState(0);
 
     useEffect(()=> {
 
@@ -38,13 +38,13 @@ function PostPage() {
 
     },[id,history])
 
-    function onScroll(e){
-        if (e.target.scrollTop > 10) {
-            setFade (false);
-            return;
-        }
-        setFade (true);
-    }
+    // function onScroll(e){
+    //     if (e.target.scrollTop > 10) {
+    //         setFade (false);
+    //         return;
+    //     }
+    //     setFade (true);
+    // }
 
     return (
         <>
@@ -53,6 +53,8 @@ function PostPage() {
             <article className="PostPage mx-auto d-flex flex-column flex-lg-row col col-lg-10">
                 <div className="image-wrapper">
                     <img className="image" src={'data:; base64,' + post.image} alt={post.user.username +"'s photo"}/>
+                    {/* <div className="image-wrapper" style={{ background: `url("data:; base64, ${post.image}")` }}></div> */}
+
                 </div>
                 <div className="post-details col col-lg-4 ">
                     <div className="header">
@@ -64,16 +66,17 @@ function PostPage() {
                         <div className="likes">
                             <PostLike postId={post._id} likesCount={post.likes.length}/>
                         </div>
+                        <div><BiCommentDetail className="comments-count"/> {commentsCount}</div>
                     </div>
                     { post.caption &&
                         <div className="caption">
                             <span>{post.caption}</span>
                         </div>
                     }
-                    <div onScroll={onScroll} className="comments">
-                        <Comments postId={post._id}/>
+                    <div className="comments">
+                        <Comments setCommentsCount={setCommentsCount} postId={post._id}/>
                     </div>
-                    { isFade && <div className={"fade-out"}></div> }
+                    {/* { isFade && <div className={"fade-out"}></div> } */}
                 </div>
             </article>
 

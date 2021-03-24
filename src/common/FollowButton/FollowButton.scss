@@ -1,7 +1,11 @@
-.FollowButton {
-    $base-color: #fb3b88;
+.user-result.FollowButton {
     position: absolute;
     bottom: 15px;
+}
+
+.FollowButton {
+    $base-color: #fb3b88;
+
     
     .btn {
         width: 120px;

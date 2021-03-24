@@ -5,32 +5,28 @@ import { useEffect, useState } from "react";
 import { PostService } from "../../services/post.service";
 
 
-function Comments({postId}) {
+function Comments({ postId , setCommentsCount }) {
 
     const [comments,setComments] = useState([]);
-
 
     useEffect(()=>{
         async function getComments(){
             try{
                 const commentsArr = await PostService.getComments(postId);
                 setComments(commentsArr);
+                setCommentsCount(commentsArr.length);
+
             }catch(err){
                 console.log(err)
             } 
         }
         getComments()
         
-    },[postId]);
+    },[postId,setCommentsCount]);
 
     function onCommentAdd(comment){
-        setComments([...comments, comment])
-    }
-    function isManyComments(){
-        if (comments.length > 8) {
-            return true
-        }
-        return false
+        setCommentsCount(comments.length + 1 );
+        setComments([...comments, comment]);
     }
 
     return (

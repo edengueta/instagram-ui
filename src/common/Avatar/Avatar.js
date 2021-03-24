@@ -1,6 +1,6 @@
 import './Avatar.scss'
 import PropTypes from 'prop-types';
-import avatarDefault from './batman_avatar.png';
+import avatarDefault from './avatar.png';
 import { Link } from 'react-router-dom';
 
 function Avatar(props) {
