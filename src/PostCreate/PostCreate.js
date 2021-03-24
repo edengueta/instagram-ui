@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiImageAdd } from 'react-icons/bi';
 import './PostCreate.scss';
 import {postCreateSchema} from './postCreate.schem'
@@ -13,6 +13,28 @@ function PostCreate() {
 
     const initialValues = {image:'',caption:''};
 	const history = useHistory();
+	const [selectedFile, setSelectedFile] = useState()
+    const [preview, setPreview] = useState()
+	
+	useEffect(() => {
+        if (!selectedFile) {
+            setPreview(undefined)
+            return
+        }
+		const objectUrl = URL.createObjectURL(selectedFile)
+        setPreview(objectUrl)
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [selectedFile])
+
+    function onSelectFile(e){
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(undefined)
+            return
+        }
+		setSelectedFile(e.target.files[0])
+	}
 
 	async function submit(values) {
 		const data = new FormData();
@@ -30,42 +52,47 @@ function PostCreate() {
 		}catch(err){
 			console.log(err);
 		}
-
 	}
 
+
     return (
-		<div className="PostCreate">
-				<h2>Create Post</h2>
+		<div className="PostCreate ">
+				<h4>Add your photo</h4>
 				<Formik
 					initialValues={initialValues}
 					validationSchema={postCreateSchema}
 					onSubmit ={submit}>
 					{({ setFieldValue , isSubmitting})=> (
-						<Form className="mt-5 col-lg-8 px-0">
-							<div className="form-group my-3">
-								<label htmlFor="image" className="image-upload">
-									<BiImageAdd/>
-								</label>   
-								<input
-									type="file"
-									id="image"
-									name="image"
-									onChange={(e)=>  setFieldValue('image', e.target.files[0])}
-								/>
-								<ErrorMessage name="image" component="span"/>
+						<Form className="form">
+							<div>
+								<div className="form-group my-3">
+									<label htmlFor="image" className="image-upload">
+										{selectedFile &&  <img className="preview" alt="preview" src={preview} /> }
+										<BiImageAdd/>
+									</label>
+									   
+									<input
+										type="file"
+										id="image"
+										name="image"
+										onChange={(e)=> {
+											setFieldValue('image', e.target.files[0]);
+											onSelectFile(e)
+											}
+										} />
+									<ErrorMessage className="ErrorMessage" name="image" component="div"/>
+								</div>
+								<div className="form-group my-3">
+									<Field  as="textarea" className="form-control" name="caption" rows="1" id="caption" placeholder="Add a caption..."></Field>
+									<ErrorMessage name="caption" component="span"/>
+								</div>
 							</div>
-							<div className="form-group my-3">
-								<Field  as="textarea" className="form-control" name="caption" id="caption" placeholder="Write a caption..."></Field>
-								<ErrorMessage name="caption" component="span"/>
-							</div>
-							<div className="form-group text-right my-3">
-								<button
-									type="submit"
-									className="btn d-grid mx-auto col-6"
-									disabled={isSubmitting}>
-										{ isSubmitting ? 'Posting...' : 'Post' }
-								</button>
-							</div>
+							<button
+								type="submit"
+								className="btn btn-post"
+								disabled={isSubmitting}>
+									{ isSubmitting ? 'Posting...' : 'Post' }
+							</button>
 						</Form>
 					)}
 

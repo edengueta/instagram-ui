@@ -8,7 +8,6 @@ import { UserContext } from '../../user-context';
 function PostLike({postId, likesCount}) {
         
     const { user } = useContext( UserContext );
-    const userId= user._id;
 
     const [isLiked, setLike] = useState(false);
     const [counter, setCounter] = useState(likesCount);
@@ -18,7 +17,7 @@ function PostLike({postId, likesCount}) {
 
         async function getIsLiked() {
             try{
-                const res=await PostService.isLiked(postId, userId);
+                const res=await PostService.isLiked(postId, user._id);
                 if (!res) {
                     setLike(false);
                     return;
@@ -44,7 +43,7 @@ function PostLike({postId, likesCount}) {
 
     async function addLike(){
         try{
-            await PostService.like(postId, userId);
+            await PostService.like(postId, user._id);
         }catch(err){
             console.log(err)
         }
@@ -54,7 +53,7 @@ function PostLike({postId, likesCount}) {
 
     async function removeLike(){
         try{
-            await PostService.unlike(postId, userId);
+            await PostService.unlike(postId, user._id);
         }catch(err){
             console.log(err)
         }

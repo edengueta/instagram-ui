@@ -1,23 +1,84 @@
 .PostCreate{
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
+    h4{
+        margin-top: 20px;
+    }
     input[type="file"] {
         display: none;
     }
 
-    .image-upload {
-        border: 1px solid #ccc;
-        display: inline-block;
-        padding: 6px 12px;
-        cursor: pointer;
-    }
-
-    .btn {
-        background-color: #fb3b88;
-        color: white;
-
-        &:hover {
-            background-color: #e9377e;
+    .form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        textarea{
+            outline:none;
+            // border-radius: 10px;
+            overflow: hidden;
+            resize: none;
         }
+
+        .image-upload {
+            border: 1px solid #ccc;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            width: 250px;
+            height: 250px;
+            font-size: 10rem;
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            color: #ccc;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            &:hover {
+                background-color: black;
+            }
+
+
+            .preview{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: inherit;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                   opacity: 0.5;
+                }
+            }
+        }
+
+        .ErrorMessage {
+            color: #cc0033;
+            font-size: 14px;
+            margin-top: 10px;
+            text-transform:uppercase;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(122.57% 122.57% at 113.4% 7%, #B83C9F 3.58%, #D51C68 33.37%, #D71A65 35%, #E55143 52.06%, #F17E27 65%, #FCED2F 100%);
+            border-radius: 50%;
+            border: 3px solid white;
+            color: white;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                background: radial-gradient(129.23% 129.23% at 97.07% 11.29%, #B83C9F 3.58%, #D51C68 33.37%, #D71A65 35%, #E55143 52.06%, #F17E27 65%, #FCED2F 100%);
+                transform: scale(1.1) translate(0px,-4px);
+            }
+        } 
     }
+
 }
