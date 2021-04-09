@@ -41,14 +41,16 @@ function PostCreate() {
 		data.append('image',values.image);
 		data.append('caption',values.caption);
 		try {
-			await fetch (environment.apiUrl +'/post', {
+			const res = await fetch (environment.apiUrl +'/post', {
 				method:'PUT',
 				body:data,
 				headers: {
 					Authorization: UserService.getToken(),
 				}
 			})
-			history.push('/');
+			const newPost= await res.json()
+			history.push('/post/' + newPost._id);
+
 		}catch(err){
 			console.log(err);
 		}
@@ -56,7 +58,7 @@ function PostCreate() {
 
 
     return (
-		<div className="PostCreate ">
+		<div className="PostCreate">
 				<h4>Add your photo</h4>
 				<Formik
 					initialValues={initialValues}
@@ -75,6 +77,7 @@ function PostCreate() {
 										type="file"
 										id="image"
 										name="image"
+										accept="image/*"
 										onChange={(e)=> {
 											setFieldValue('image', e.target.files[0]);
 											onSelectFile(e)

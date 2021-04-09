@@ -41,6 +41,7 @@ export class PostService {
                 userId
             }),
 		});
+        return res.json();
     }
     static async unlike(postId,userId) {
         const res = await fetch (environment.apiUrl + '/post/'+ postId +'/likes/' + userId, {
@@ -49,6 +50,7 @@ export class PostService {
                  Authorization: UserService.getToken(),
 			},
 		});
+        return res.json();
     }
 
     static async createComment(postId,content) {

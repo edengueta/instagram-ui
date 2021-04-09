@@ -45,7 +45,9 @@ function Post({data}) {
                 </div>
                 <div onDoubleClick={onDoubleClick} onTouchEnd={checkDoubleTap} className="image-wrapper">
                 {/* <div className="image-wrapper" style={{ background: `url("data:; base64, ${data.image}")` }}> Alternative */}
-                    <img  className="image" src={'data:; base64,' + data.image} alt={data.user.username +"'s photo"}/>
+                {/* <img  className="image" src={'data:; base64,' + data.image} alt={data.user.username +"'s photo"}/> */}
+                    <img  className="image" src={data.image} alt={data.user.username +"'s photo"}/>
+
                 </div>
                 <div className="footer">
                     { data.caption &&
