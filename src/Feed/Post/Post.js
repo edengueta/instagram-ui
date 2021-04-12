@@ -4,6 +4,8 @@ import Avatar from '../../common/Avatar/Avatar';
 import Username from '../../common/Username/Username';
 import PostLike from '../../common/PostLike/PostLike';
 import CreatedAt from '../../common/CreatedAt/CreatedAt';
+import {Image, Transformation} from 'cloudinary-react';
+
 
 
 
@@ -44,10 +46,9 @@ function Post({data}) {
                     </div>
                 </div>
                 <div onDoubleClick={onDoubleClick} onTouchEnd={checkDoubleTap} className="image-wrapper">
-                {/* <div className="image-wrapper" style={{ background: `url("data:; base64, ${data.image}")` }}> Alternative */}
-                {/* <img  className="image" src={'data:; base64,' + data.image} alt={data.user.username +"'s photo"}/> */}
-                    <img  className="image" src={data.image} alt={data.user.username +"'s photo"}/>
-
+                    <Image className="image" cloudName="edengueta" publicId={data.image}>
+                        <Transformation height="800" width="800" crop="fill" />
+                    </Image>
                 </div>
                 <div className="footer">
                     { data.caption &&

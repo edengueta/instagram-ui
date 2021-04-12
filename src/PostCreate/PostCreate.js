@@ -69,8 +69,8 @@ function PostCreate() {
 							<div>
 								<div className="form-group my-3">
 									<label htmlFor="image" className="image-upload">
-										{selectedFile &&  <img className="preview" alt="preview" src={preview} /> }
-										<BiImageAdd/>
+										{selectedFile &&  <img className="preview" alt="preview" src={preview} />}
+										<BiImageAdd className="upload-icon" />
 									</label>
 									   
 									<input

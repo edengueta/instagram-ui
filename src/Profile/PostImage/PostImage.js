@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './PostImage.scss';
+import { Image,Transformation } from 'cloudinary-react';
+
 
 function PostImage({image, id}) {
     return (
