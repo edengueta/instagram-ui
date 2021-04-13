@@ -1,6 +1,6 @@
 import { ErrorMessage, Form, Formik } from 'formik';
 import React, {useContext, useEffect, useState } from 'react';
-import { BiImageAdd } from 'react-icons/bi';
+import { BiPencil } from 'react-icons/bi';
 import './UploadAvatar.scss';
 import Cookies from 'js-cookie';
 import {uploadAvatarSchema} from './uploadAvatar.schem'
@@ -80,7 +80,7 @@ function UploadAvatar() {
 									<label htmlFor="image" className="image-upload">
 										{!selectedFile && <img className="preview" src={user.avatar} />}
 										{selectedFile && <img className="preview" alt="preview" src={preview} />}
-										<BiImageAdd className="upload-icon" />
+										<BiPencil className="upload-icon" />
 									</label>
 									   
 									

@@ -45,7 +45,7 @@ export class PostService {
     }
     static async unlike(postId,userId) {
         const res = await fetch (environment.apiUrl + '/post/'+ postId +'/likes/' + userId, {
-            method: 'DELETE',
+            method: 'POST',
 			headers: {
                  Authorization: UserService.getToken(),
 			},

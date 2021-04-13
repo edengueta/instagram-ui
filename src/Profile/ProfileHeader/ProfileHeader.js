@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserService } from '../../services/user.service';
 import './ProfileHeader.scss'
 import Avatar from '../../common/Avatar/Avatar';
-import { BiImageAdd } from 'react-icons/bi';
+import { BiPencil } from 'react-icons/bi';
 import FollowButton from '../../common/FollowButton/FollowButton';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../user-context';
@@ -43,7 +43,7 @@ function ProfileHeader({ username, postsCount}) {
             <div className="profile-image">
                 { isOwnProfile() &&
                 <Link to="/avatar">
-                    <div className="upload-icon"><BiImageAdd/></div>
+                    <div className="upload-icon"><BiPencil/></div>
                 </Link>
                 }
                 <Avatar image={requestedUser.avatar} size="lg"/>

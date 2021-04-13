@@ -5,33 +5,22 @@ import { PostService } from '../../services/post.service';
 import { UserContext } from '../../user-context';
         
 
-function PostLike({postId, likesCount}) {
+function PostLike({postId, likesCount, likes, isDoubleClicked, setIsDoubleClick}) {
         
     const { user } = useContext( UserContext );
-
-    const [isLiked, setLike] = useState(false);
+    const [isLiked, setLike] = useState(likes.includes(user._id));
     const [counter, setCounter] = useState(likesCount);
 
 
-    useEffect(()=> {
-
-        async function getIsLiked() {
-            try{
-                const res=await PostService.isLiked(postId, user._id);
-                if (!res) {
-                    setLike(false);
-                    return;
-                }
-                setLike(true);
-            }catch(err){
-                console.log(err)
-            }
-        }
-        getIsLiked();
+    useEffect ( ()=> {
         
-    },[postId]);
+        if (isDoubleClicked){
+            likeToggle();
+            setIsDoubleClick(false);
+        }
+        
+    },[isDoubleClicked,likes]);
 
-    
     function likeToggle(){
         if (!isLiked) {
            addLike(); 
@@ -39,26 +28,29 @@ function PostLike({postId, likesCount}) {
             removeLike()
         };
         setLike(!isLiked);
+        console.log(isLiked)
+
     }
 
     async function addLike(){
         try{
-            await PostService.like(postId, user._id);
+            const res=await PostService.like(postId);
+            console.log("added"); 
+            setCounter(res.likes.length);
         }catch(err){
             console.log(err)
         }
-        console.log("added"); 
-        setCounter(counter+1);
     }
 
     async function removeLike(){
         try{
-            await PostService.unlike(postId, user._id);
+            const res=await PostService.unlike(postId, user._id);
+            console.log("removed");
+            setCounter(res.likes.length);
         }catch(err){
             console.log(err)
         }
-        console.log("removed");
-        setCounter(counter-1);
+
     }
 
     return (

@@ -8,7 +8,7 @@ import CreatedAt from '../../common/CreatedAt/CreatedAt';
 
 function Post({post}) {
 
-    const [isLiked, setLiked] = useState(false);
+    const [isDoubleClicked, setIsDoubleClick] = useState(false);
 
 // check double tap
     let timeout;
@@ -30,8 +30,7 @@ function Post({post}) {
 
     function onDoubleClick(e){
         e.preventDefault();
-        setLiked(!isLiked);
-        console.log(isLiked);
+        setIsDoubleClick(!isDoubleClicked);
     }
 
     return (
@@ -52,7 +51,7 @@ function Post({post}) {
                             {" " +post.caption}
                         </p>
                     }
-                    <PostLike postId={post._id} likesCount={post.likes.length} />
+                    <PostLike postId={post._id} likesCount={post.likes.length} likes={post.likes} setIsDoubleClick={setIsDoubleClick} isDoubleClicked={isDoubleClicked}/>
                     <CreatedAt link={"/post/"+post._id} date={post.createdAt}/>
                 </div>
             </article>
