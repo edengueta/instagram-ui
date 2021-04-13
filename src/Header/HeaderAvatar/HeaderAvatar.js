@@ -4,7 +4,7 @@ import './HeaderAvatar.scss'
 import { UserContext } from '../../user-context';
 import { Link } from 'react-router-dom';
 
-function HeaderAvatar(props) {
+function HeaderAvatar() {
 
     const { user } = useContext( UserContext );
 

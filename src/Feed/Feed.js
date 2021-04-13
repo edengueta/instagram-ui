@@ -20,7 +20,7 @@ const [posts,setPosts]= useState([])
         <div className='Feed'>
             {
                 posts.map(post => {
-                    return <Post data={post} key={post._id}/>
+                    return <Post post={post} key={post._id}/>
                 })
             }
 

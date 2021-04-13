@@ -7,7 +7,6 @@ import CreatedAt from '../common/CreatedAt/CreatedAt';
 import PostLike from '../common/PostLike/PostLike';
 import Username from '../common/Username/Username';
 import { PostService } from '../services/post.service';
-import {Image, Transformation} from 'cloudinary-react';
 
 
 import './PostPage.scss';
@@ -39,15 +38,14 @@ function PostPage() {
     },[id,history])
 
 
+
     return (
         <>
         { post && (
 
             <article className="PostPage mx-auto d-flex flex-column flex-lg-row col col-lg-10">
                 <div className="image-wrapper">
-                    <Image className="image" cloudName="edengueta" publicId={post.image}>
-                        <Transformation height="800" width="800" crop="fill" />
-                    </Image>
+                    <img className="image" src={post.image} alt={post.user.username +"'s post"}/>
                 </div>
                 <div className="post-details col col-lg-4 ">
                     <div className="header">

@@ -1,21 +1,25 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import { ErrorMessage, Form, Formik } from 'formik';
+import React, {useContext, useEffect, useState } from 'react';
 import { BiImageAdd } from 'react-icons/bi';
-import './PostCreate.scss';
-import {postCreateSchema} from './postCreate.schem'
-import environment from '../environments';
+import './UploadAvatar.scss';
+import Cookies from 'js-cookie';
+import {uploadAvatarSchema} from './uploadAvatar.schem'
+import environment from '../../../environments/index';
 import { useHistory } from 'react-router-dom';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../../services/user.service';
+import { UserContext } from '../../../user-context';
 
 
 
-function PostCreate() {
+function UploadAvatar() {
+    const { user, setUser } = useContext( UserContext );
 
-    const initialValues = {image:'',caption:''};
+
+    const initialValues = {image:''};
 	const history = useHistory();
-	const [selectedFile, setSelectedFile] = useState()
-    const [preview, setPreview] = useState()
-	
+	const [selectedFile, setSelectedFile] = useState();
+    const [preview, setPreview] = useState(user.avatar);
+
 	useEffect(() => {
         if (!selectedFile) {
             setPreview(undefined)
@@ -28,6 +32,7 @@ function PostCreate() {
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile])
 
+
     function onSelectFile(e){
         if (!e.target.files || e.target.files.length === 0) {
             setSelectedFile(undefined)
@@ -39,17 +44,20 @@ function PostCreate() {
 	async function submit(values) {
 		const data = new FormData();
 		data.append('image',values.image);
-		data.append('caption',values.caption);
 		try {
-			const res = await fetch (environment.apiUrl +'/post', {
-				method:'PUT',
+			const res = await fetch (environment.apiUrl +'/user/avatar', {
+				method:'POST',
 				body:data,
 				headers: {
 					Authorization: UserService.getToken(),
 				}
 			})
-			const newPost= await res.json()
-			history.push('/post/' + newPost._id);
+			const json = await res.json();
+			Cookies.set('insta-user', json.token, { expires: 100 });
+
+			const updatedUser = await UserService.me();
+			setUser(updatedUser);
+			history.push('/profile/' + user.username);
 
 		}catch(err){
 			console.log(err);
@@ -58,22 +66,24 @@ function PostCreate() {
 
 
     return (
-		<div className="PostCreate">
-				<h4>Add your photo</h4>
+		<div className="UploadAvatar">
+				<h4>Upload a new avatar</h4>
 
 				<Formik
 					initialValues={initialValues}
-					validationSchema={postCreateSchema}
+					validationSchema={uploadAvatarSchema}
 					onSubmit ={submit}>
 					{({ setFieldValue , isSubmitting})=> (
 						<Form className="form">
 							<div>
 								<div className="form-group my-3">
 									<label htmlFor="image" className="image-upload">
-										{selectedFile &&  <img className="preview" alt="preview" src={preview} />}
+										{!selectedFile && <img className="preview" src={user.avatar} />}
+										{selectedFile && <img className="preview" alt="preview" src={preview} />}
 										<BiImageAdd className="upload-icon" />
 									</label>
 									   
+									
 									<input
 										type="file"
 										id="image"
@@ -86,16 +96,12 @@ function PostCreate() {
 										} />
 									<ErrorMessage className="ErrorMessage" name="image" component="div"/>
 								</div>
-								<div className="form-group my-3">
-									<Field  as="textarea" className="form-control" name="caption" rows="1" id="caption" placeholder="Add a caption..."></Field>
-									<ErrorMessage name="caption" component="span"/>
-								</div>
 							</div>
 							<button
 								type="submit"
 								className="btn btn-post"
 								disabled={isSubmitting}>
-									{ isSubmitting ? 'Posting...' : 'Post' }
+									{ isSubmitting ? 'Uploading...' : 'Upload' }
 							</button>
 						</Form>
 					)}
@@ -105,4 +111,4 @@ function PostCreate() {
     );
 }
 
-export default PostCreate;
+export default UploadAvatar;

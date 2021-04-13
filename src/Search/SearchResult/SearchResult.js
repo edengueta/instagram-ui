@@ -8,8 +8,6 @@ import FollowButton from '../../common/FollowButton/FollowButton';
 import { UserContext } from '../../user-context';
 
 
-
-
 function SearchResult({data}) {
     const { user } = useContext( UserContext );
     const ownUserId= user._id;

@@ -1,0 +1,87 @@
+.UploadAvatar{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    h4{
+        margin-top: 20px;
+    }
+    input[type="file"] {
+        display: none;
+    }
+
+    .form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .image-upload {
+            border: 1px solid #ccc;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            width: 250px;
+            height: 250px;
+            font-size: 10rem;
+            text-align: center;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+
+
+            .upload-icon {
+                transition: all 0.3s ease-in-out;
+                color: #ccc;
+
+                &:hover {
+                    opacity: 0.5;
+
+                }
+            }
+
+            .preview{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: inherit;
+                background-color: white;
+                object-fit: cover;
+                object-position: center center;
+                height: 100%;
+                width: 100%; 
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                   opacity: 0.5;
+                }
+            }
+        }
+
+        .ErrorMessage {
+            color: #cc0033;
+            font-size: 14px;
+            margin-top: 10px;
+            text-transform:uppercase;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(122.57% 122.57% at 113.4% 7%, #B83C9F 3.58%, #D51C68 33.37%, #D71A65 35%, #E55143 52.06%, #F17E27 65%, #FCED2F 100%);
+            border-radius: 50%;
+            border: 3px solid white;
+            color: white;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                transform: scale(1.1) ;
+            }
+            
+        }
+    }
+
+}

@@ -36,7 +36,7 @@ useEffect( ()=> {
             <div className="gallery">
                 {
                     posts.map(post => {
-                        return <PostImage image={post.image} key={post._id} id={post._id}/>
+                        return <PostImage username={username} image={post.image} key={post._id} id={post._id}/>
                     })
                 }
             </div>

@@ -4,12 +4,9 @@ import Avatar from '../../common/Avatar/Avatar';
 import Username from '../../common/Username/Username';
 import PostLike from '../../common/PostLike/PostLike';
 import CreatedAt from '../../common/CreatedAt/CreatedAt';
-import {Image, Transformation} from 'cloudinary-react';
 
 
-
-
-function Post({data}) {
+function Post({post}) {
 
     const [isLiked, setLiked] = useState(false);
 
@@ -40,25 +37,23 @@ function Post({data}) {
     return (
             <article className="Post mx-auto ">
                 <div className="header row g-2">
-                    <Avatar size="md" image={data.user.avatar} link={data.user.username}/>
+                    <Avatar size="md" image={post.user.avatar} link={post.user.username}/>
                     <div className="col-10">
-                        <Username username={data.user.username}/>
+                        <Username username={post.user.username}/>
                     </div>
                 </div>
                 <div onDoubleClick={onDoubleClick} onTouchEnd={checkDoubleTap} className="image-wrapper">
-                    <Image className="image" cloudName="edengueta" publicId={data.image}>
-                        <Transformation height="800" width="800" crop="fill" />
-                    </Image>
+                    <img className="image" src={post.image} alt={post.user.username +"'s post"}/>
                 </div>
                 <div className="footer">
-                    { data.caption &&
+                    { post.caption &&
                         <p className="caption">
-                            <Username username={data.user.username}/>
-                            {" " +data.caption}
+                            <Username username={post.user.username}/>
+                            {" " +post.caption}
                         </p>
                     }
-                    <PostLike postId={data._id} likesCount={data.likes.length} />
-                    <CreatedAt link={"/post/"+data._id} date={data.createdAt}/>
+                    <PostLike postId={post._id} likesCount={post.likes.length} />
+                    <CreatedAt link={"/post/"+post._id} date={post.createdAt}/>
                 </div>
             </article>
     );

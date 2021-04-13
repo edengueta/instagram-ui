@@ -34,7 +34,7 @@ function Login() {
         }
 
         const json = await res.json();
-        Cookies.set('insta-user', json.token, { expires: 30 });
+        Cookies.set('insta-user', json.token, { expires: 100 });
 
         const user = await UserService.me();
         setUser(user);
