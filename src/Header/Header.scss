@@ -9,11 +9,15 @@
     z-index: 3;
 
     
-    a{
+    a, .post-icon{
+        line-height: 0;
         color: rgb(38, 38, 38);
         &:hover, &:focus {
             color: #fb3b88;
         }
+    }
+    .post-icon {
+        cursor: pointer;
     }
 
     .logo{

@@ -4,17 +4,19 @@ import './ProfileHeader.scss'
 import Avatar from '../../common/Avatar/Avatar';
 import { BiPencil } from 'react-icons/bi';
 import FollowButton from '../../common/FollowButton/FollowButton';
-import { Link } from 'react-router-dom';
 import { UserContext } from '../../user-context';
+import Popup from 'reactjs-popup';
+// import 'reactjs-popup/dist/index.css';
+import './popup.scss'
 
-
+import UploadAvatar from './UploadAvatar/UploadAvatar'
 
 function ProfileHeader({ username, postsCount}) {
 
     const { user } = useContext( UserContext );
 
-    const[requestedUser, setRequestedUser]= useState({})
-    const[followers, setFollowers]=useState([])
+    const[requestedUser, setRequestedUser]= useState({});
+    const[followers, setFollowers]=useState([]);
 
     useEffect ( ()=> {
 
@@ -42,9 +44,14 @@ function ProfileHeader({ username, postsCount}) {
         <div className="ProfileHeader">
             <div className="profile-image">
                 { isOwnProfile() &&
-                <Link to="/avatar">
-                    <div className="upload-icon"><BiPencil/></div>
-                </Link>
+                <Popup trigger={<div className="upload-icon"><BiPencil/></div>} position="center center" modal lockScroll>
+                    {
+                        close => ( <UploadAvatar close={close}/>)
+                    }
+                </Popup>
+                // <Link to="/avatar">
+                //     <div className="upload-icon"><BiPencil/></div>
+                // </Link>
                 }
                 <Avatar image={requestedUser.avatar} size="lg"/>
             </div>

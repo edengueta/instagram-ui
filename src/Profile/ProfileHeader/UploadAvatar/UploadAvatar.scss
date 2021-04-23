@@ -6,6 +6,7 @@
     
     h4{
         margin-top: 20px;
+        text-align: center;
     }
     input[type="file"] {
         display: none;
@@ -68,14 +69,19 @@
             transition: all 0.3s ease-in-out;
         }
 
+
         .btn {
-            width: 100px;
-            height: 100px;
+            width: 70px;
+            height: 70px;
+            text-align: center;
             background: radial-gradient(122.57% 122.57% at 113.4% 7%, #B83C9F 3.58%, #D51C68 33.37%, #D71A65 35%, #E55143 52.06%, #F17E27 65%, #FCED2F 100%);
             border-radius: 50%;
             border: 3px solid white;
             color: white;
             transition: all 0.3s ease-in-out;
+            position: absolute;
+            bottom:0px;
+            right: 0;
 
             &:hover {
                 transform: scale(1.1) ;

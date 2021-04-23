@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
 
 
 
-function PostCreate() {
+function PostCreate({close}) {
 
     const initialValues = {image:'',caption:''};
 	const history = useHistory();
@@ -49,13 +49,13 @@ function PostCreate() {
 				}
 			})
 			const newPost= await res.json()
+			close();
 			history.push('/post/' + newPost._id);
 
 		}catch(err){
 			console.log(err);
 		}
 	}
-
 
     return (
 		<div className="PostCreate">
@@ -87,7 +87,14 @@ function PostCreate() {
 									<ErrorMessage className="ErrorMessage" name="image" component="div"/>
 								</div>
 								<div className="form-group my-3">
-									<Field  as="textarea" className="form-control" name="caption" rows="1" id="caption" placeholder="Add a caption..."></Field>
+									<Field
+										as="textarea"
+										className="form-control"
+										name="caption"
+										rows="1"
+										id="caption"
+										placeholder="Add a caption...">
+									</Field>
 									<ErrorMessage name="caption" component="span"/>
 								</div>
 							</div>

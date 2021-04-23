@@ -11,9 +11,8 @@ import { UserContext } from '../../../user-context';
 
 
 
-function UploadAvatar() {
+function UploadAvatar({close}) {
     const { user, setUser } = useContext( UserContext );
-
 
     const initialValues = {image:''};
 	const history = useHistory();
@@ -54,9 +53,10 @@ function UploadAvatar() {
 			})
 			const json = await res.json();
 			Cookies.set('insta-user', json.token, { expires: 100 });
-
 			const updatedUser = await UserService.me();
 			setUser(updatedUser);
+			close();
+			window.location.reload();
 			history.push('/profile/' + user.username);
 
 		}catch(err){
@@ -101,7 +101,7 @@ function UploadAvatar() {
 								type="submit"
 								className="btn btn-post"
 								disabled={isSubmitting}>
-									{ isSubmitting ? 'Uploading...' : 'Upload' }
+									{ isSubmitting ? 'Saving...' : 'Save' }
 							</button>
 						</Form>
 					)}

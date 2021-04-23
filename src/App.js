@@ -67,9 +67,6 @@ function App() {
                   <Route path="/profile/:username">
                       <Profile/>
                   </Route>
-                  <Route path="/avatar">
-                      <UploadAvatar/>
-                  </Route>
                   <Route path="/search">
                       <Search/>
                   </Route>

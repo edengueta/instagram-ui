@@ -2,9 +2,14 @@ import React from 'react';
 import './Menu.scss'
 import { Link } from 'react-router-dom';
 import { BiImageAdd, BiHomeCircle , BiSearchAlt} from 'react-icons/bi';
+import Popup from 'reactjs-popup';
+import PostCreate from "../../PostCreate/PostCreate";
+import { isMobile } from "react-device-detect";
+
 
 
 function Menu() {
+    console.log(isMobile)
     return (
             <ul className="navbar-nav">
                 <li className="navbar-item">
@@ -18,9 +23,15 @@ function Menu() {
                     </Link>
                 </li>
                 <li className="navbar-item">
-                    <Link className="nav-link" to="/post/create">
+                    <Popup trigger={<div ><BiImageAdd className="post-icon"/></div>} nested={!isMobile} modal={isMobile} lockScroll>
+                        {
+                            close => ( <PostCreate close={close}/>)
+                        }
+                    </Popup>
+
+                    {/* <Link className="nav-link" to="/post/create">
                         <BiImageAdd/>
-                    </Link>
+                    </Link> */}
                 </li>
             </ul>    
     );
