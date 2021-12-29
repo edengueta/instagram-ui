@@ -104,6 +104,7 @@ function UploadAvatar({close,posts}) {
 											<Popup
 												trigger={ <div className="remove-icon"> <BiTrash/> </div> }
 												nested = {!isMobile}
+												modal={isMobile}
 												closeOnDocumentClick >
 														{ close => ( <RemoveAvatar close={close}/> ) }
 											</Popup>										
