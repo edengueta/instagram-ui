@@ -1,0 +1,13 @@
+.RemoveAvatar {
+    display: flex;
+    flex-direction: column;
+    
+    .btn {
+        background-color: #fb3b88;
+        color: white;
+
+        &:hover {
+            background-color: #e9377e;
+        }
+    }
+}

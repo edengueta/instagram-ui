@@ -1,15 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import './PostLike.scss';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import './PostLikeDC.scss';
+// import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { PostService } from '../../services/post.service';
 import { UserContext } from '../../user-context';
         
 
-function PostLike({postId, likesCount, likes, isDoubleClicked, setIsDoubleClick}) {
+function PostLikeDC({postId, likes, isDoubleClicked, setIsDoubleClick}) {
         
     const { user } = useContext( UserContext );
     const [isLiked, setLike] = useState(likes.includes(user._id));
-    const [counter, setCounter] = useState(likesCount);
 
 
     useEffect ( ()=> {
@@ -19,7 +18,7 @@ function PostLike({postId, likesCount, likes, isDoubleClicked, setIsDoubleClick}
             setIsDoubleClick(false);
         }
         
-    },[isDoubleClicked,likes]);
+    },[isDoubleClicked,likes,likeToggle]);
 
     function likeToggle(){
         if (!isLiked) {
@@ -29,13 +28,13 @@ function PostLike({postId, likesCount, likes, isDoubleClicked, setIsDoubleClick}
         };
         setLike(!isLiked);
         console.log(isLiked)
+
     }
 
     async function addLike(){
         try{
             const res=await PostService.like(postId);
             console.log("added"); 
-            setCounter(res.likes.length);
         }catch(err){
             console.log(err)
         }
@@ -45,7 +44,6 @@ function PostLike({postId, likesCount, likes, isDoubleClicked, setIsDoubleClick}
         try{
             const res=await PostService.unlike(postId, user._id);
             console.log("removed");
-            setCounter(res.likes.length);
         }catch(err){
             console.log(err)
         }
@@ -53,15 +51,12 @@ function PostLike({postId, likesCount, likes, isDoubleClicked, setIsDoubleClick}
     }
 
     return (
-            <div className="PostLike">
-                <span onClick={likeToggle}>
-                    {!isLiked && <AiOutlineHeart className="like-button unliked"/>}
-                    {isLiked && <AiFillHeart className="like-button liked"/>}
+                <span className="PostLikeDC" onClick={likeToggle}>
+                    {/* {!isLiked && <AiOutlineHeart className="like-button unliked"/>}
+                    {isLiked && <AiFillHeart className="like-button liked"/>} */}
                 </span>
-    
-                <span className="counter">{counter}</span>
-            </div>     
+
     );
 }
 
-export default PostLike;
+export default PostLikeDC;

@@ -16,7 +16,9 @@ import PostCreate from "./PostCreate/PostCreate";
 import PostPage from "./PostPage/PostPage";
 import Profile from "./Profile/Profile";
 import Search from "./Search/Search";
-import UploadAvatar from "./Profile/ProfileHeader/UploadAvatar/UploadAvatar";
+import PostImage from "./common/PostImage/PostImage";
+import PostPage2 from "./PostPage2/PostPage2";
+// import UploadAvatar from "./Profile/ProfileHeader/UploadAvatar/UploadAvatar";
 
 function App() {
 
@@ -64,11 +66,17 @@ function App() {
                   <Route path="/post/:id">
                       <PostPage/>
                   </Route>
+                  <Route path="/post2/:id">
+                      <PostPage2/>
+                  </Route>
                   <Route path="/profile/:username">
                       <Profile/>
                   </Route>
                   <Route path="/search">
                       <Search/>
+                  </Route>
+                  <Route path="/image/:id">
+                      <PostImage/>
                   </Route>
                   <Route path="/" exact>
                       <Feed/>

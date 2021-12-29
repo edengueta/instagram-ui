@@ -1,0 +1,12 @@
+.PostImage {
+
+    border-right: 1px solid #eeeeee;
+    .image {
+        object-fit: cover;
+        object-position: center center;
+        height: 100%;
+        width: 100%; 
+    }
+    
+}
+

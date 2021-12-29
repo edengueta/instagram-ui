@@ -3,7 +3,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 1;
     
+    .form-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;    
+    }
     h4{
         margin-top: 20px;
         text-align: center;
@@ -12,10 +20,78 @@
         display: none;
     }
 
+    .gallery {
+
+        display: grid;
+        grid-template-columns: repeat( 5 , 1fr );
+        grid-gap: 0.5rem;
+        max-width: 250px;
+        margin: 20px 0;
+        padding-bottom: 10px;
+        overflow-x: scroll;
+
+        &::-webkit-scrollbar {
+            background-color: rgb(175, 175, 175);
+            border-radius: 20px;
+            height: 6px; 
+
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #dbdbdb;
+            border-radius: 20px;
+            width: 30px;
+            height: 30px;
+        }
+
+
+        .image {
+            width: 70px;
+            border: #eee 1px solid;
+            border-radius: 50%;
+        }
+    }
+
     .form{
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative;
+
+        .remove-icon {
+            position: absolute;
+            left: 8%;
+            top:8%;
+            font-size: 26px;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: white;
+            color: rgb(38, 38, 38);
+            box-shadow: #00000030 0 10px 20px -5px;
+            transition:  all 0.3s ease-in-out;
+            cursor: pointer;
+            z-index: 3;
+
+            @media (max-width: 425px) {
+                left: 3%;
+                top:3%;
+            }
+            @media (max-width: 325px) {
+
+                font-size: 20px;
+                width: 30px;
+                height: 30px;
+            }
+
+            &:hover, &:focus {
+                color: #fb3b88;
+                transform: scale(0.9);
+                box-shadow: #00000000 0 10px 50px;
+
+            }
+        }
+
 
         .image-upload {
             border: 1px solid #ccc;
@@ -71,17 +147,18 @@
 
 
         .btn {
-            width: 70px;
-            height: 70px;
+            width: 85px;
+            height: 85px;
             text-align: center;
             background: radial-gradient(122.57% 122.57% at 113.4% 7%, #B83C9F 3.58%, #D51C68 33.37%, #D71A65 35%, #E55143 52.06%, #F17E27 65%, #FCED2F 100%);
             border-radius: 50%;
             border: 3px solid white;
             color: white;
             transition: all 0.3s ease-in-out;
-            position: absolute;
-            bottom:0px;
-            right: 0;
+            // position: absolute;
+            // bottom:0px;
+            // right: 0;
+            font-size: 15px;
 
             &:hover {
                 transform: scale(1.1) ;

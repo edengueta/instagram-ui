@@ -7,11 +7,11 @@ import FollowButton from '../../common/FollowButton/FollowButton';
 import { UserContext } from '../../user-context';
 import Popup from 'reactjs-popup';
 // import 'reactjs-popup/dist/index.css';
-import './popup.scss'
+// import './popup.scss'
 
 import UploadAvatar from './UploadAvatar/UploadAvatar'
 
-function ProfileHeader({ username, postsCount}) {
+function ProfileHeader({ username, postsCount, posts}) {
 
     const { user } = useContext( UserContext );
 
@@ -44,14 +44,11 @@ function ProfileHeader({ username, postsCount}) {
         <div className="ProfileHeader">
             <div className="profile-image">
                 { isOwnProfile() &&
-                <Popup trigger={<div className="upload-icon"><BiPencil/></div>} position="center center" modal lockScroll>
+                <Popup trigger={ <div className="upload-icon"><BiPencil/></div> } position="center center" modal >
                     {
-                        close => ( <UploadAvatar close={close}/>)
+                        close => ( <UploadAvatar posts={posts} close={close}/> )
                     }
                 </Popup>
-                // <Link to="/avatar">
-                //     <div className="upload-icon"><BiPencil/></div>
-                // </Link>
                 }
                 <Avatar image={requestedUser.avatar} size="lg"/>
             </div>

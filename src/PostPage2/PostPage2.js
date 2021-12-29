@@ -4,45 +4,19 @@ import { useHistory, useParams } from 'react-router-dom';
 import Avatar from '../common/Avatar/Avatar';
 import Comments from '../common/Comments/Comments';
 import CreatedAt from '../common/CreatedAt/CreatedAt';
+import PostImage from '../common/PostImage/PostImage';
 import PostLike from '../common/PostLike/PostLike';
 import Username from '../common/Username/Username';
 import { PostService } from '../services/post.service';
 
-import './PostPage.scss';
+import './PostPage2.scss';
 
-function PostPage() {
+function PostPage2() {
 
     const {id} = useParams();
     const history = useHistory();
     const [post,setPost] = useState(null);
     const [commentsCount, setCommentsCount]=useState(0);
-
-
-    const [isDoubleClicked, setIsDoubleClick] = useState(false);
-
-    // check double tap
-        let timeout;
-        let lastTap = 0;
-        function checkDoubleTap(e){
-            let currentTime = new Date().getTime();
-            let tapLength = currentTime - lastTap;
-            clearTimeout(timeout);
-            if (tapLength < 400 && tapLength > 0) {
-                onDoubleClick(e);
-            } else {
-                timeout = setTimeout(function() {
-                    clearTimeout(timeout);
-                }, 400);
-            }
-            lastTap = currentTime;
-        }
-    // end check
-    
-        function onDoubleClick(e){
-            e.preventDefault();
-            setIsDoubleClick(!isDoubleClicked);
-        }
-
 
     useEffect(()=> {
 
@@ -68,9 +42,9 @@ function PostPage() {
         <>
         { post && (
 
-            <article className="PostPage mx-auto d-flex flex-column flex-lg-row col col-lg-10">
-                <div onDoubleClick={onDoubleClick} onTouchEnd={checkDoubleTap} className="image-wrapper">
-                    <img className="image" src={post.image} alt={post.user.username +"'s post"}/>
+            <article className="PostPage2 mx-auto d-flex flex-column flex-lg-row col col-lg-10">
+                <div className="image-wrapper">
+                    <PostImage post={post}></PostImage>
                 </div>
                 <div className="post-details col col-lg-4">
                     <div className="header">
@@ -80,7 +54,7 @@ function PostPage() {
                             <CreatedAt link={"/post/"+post._id} date={post.createdAt}/>
                         </div>
                         <div className="likes">
-                            <PostLike postId={post._id} likesCount={post.likes.length} likes={post.likes} setIsDoubleClick={setIsDoubleClick} isDoubleClicked={isDoubleClicked}/>
+                            <PostLike postId={post._id} likesCount={post.likes.length} likes={post.likes}></PostLike>
                         </div>
                         <div><BiCommentDetail className="comments-count"/> {commentsCount}</div>
                     </div>
@@ -101,4 +75,4 @@ function PostPage() {
     );
 }
 
-export default PostPage;
+export default PostPage2;

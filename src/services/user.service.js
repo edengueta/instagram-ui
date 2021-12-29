@@ -87,4 +87,17 @@ export class UserService {
 		});
 		return res.json();
 	}
+
+	static async removeAvatar(){
+		const res = await fetch (environment.apiUrl + '/user/avatar/remove', {
+            method: 'POST',
+			headers: {
+                 Authorization: UserService.getToken(),
+			}
+		});
+		return res.json();
+	}
+
+
+	
 }

@@ -1,5 +1,11 @@
 .SearchResult{
     position: relative;
+
+    .FollowButton {
+            position: relative;
+            bottom: 53px;
+            left: 17px;
+    }
     
     a {
         text-decoration: none;

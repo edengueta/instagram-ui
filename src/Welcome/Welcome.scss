@@ -1,4 +1,4 @@
-.bg{
+.Welcome{
     height: 100vh;
     padding: 25px 15px;
     background-image:url("./images/bg.jpg");
@@ -19,13 +19,14 @@
     z-index: 2;
 
     .logo-wrapper{
-        width: 50%;
+        width: 40%;
         margin: 20px 0;
     }
 
     .logo {
         position: relative;
         left: 14px;
+        margin-bottom: 20px;
     }
 
     h4 {

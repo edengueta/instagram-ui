@@ -4,7 +4,7 @@ import './Welcome.scss'
 
 function Welcome(props) {
     return (
-        <div className="bg">
+        <div className="Welcome">
             {props.children}
             {<FloatingCircles/>}
         </div>

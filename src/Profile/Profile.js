@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.scss';
 import { UserService } from '../services/user.service';
-import PostImage from './PostImage/PostImage';
+import PostPreview from './PostPreview/PostPreview';
 import { useParams } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader/ProfileHeader';
 
@@ -18,10 +18,11 @@ useEffect( ()=> {
             const posts =  await UserService.getPosts(username);
             if (posts) {
                 setPosts(posts);
+                // console.log(posts)
                 return;
             }
         } catch (err){
-            console.log('something went wrong please try again');
+            console.log('something went wrong please try again ',err);
         }
     }
     getPost();
@@ -31,12 +32,18 @@ useEffect( ()=> {
 
     return (
         <div className="Profile">
-            <ProfileHeader username={username} postsCount={posts.length}/>
+            <ProfileHeader username={username} postsCount={posts.length} posts={posts}/>
             <hr/>
             <div className="gallery">
                 {
                     posts.map(post => {
-                        return <PostImage username={username} image={post.image} key={post._id} id={post._id}/>
+                        return <PostPreview
+                        key={post._id}
+                        username={username}
+                        image={post.image}
+                        id={post._id}
+                        createdAt={post.createdAt}
+                        caption={post.caption}/>
                     })
                 }
             </div>

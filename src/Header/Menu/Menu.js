@@ -9,7 +9,6 @@ import { isMobile } from "react-device-detect";
 
 
 function Menu() {
-    console.log(isMobile)
     return (
             <ul className="navbar-nav">
                 <li className="navbar-item">
@@ -28,10 +27,6 @@ function Menu() {
                             close => ( <PostCreate close={close}/>)
                         }
                     </Popup>
-
-                    {/* <Link className="nav-link" to="/post/create">
-                        <BiImageAdd/>
-                    </Link> */}
                 </li>
             </ul>    
     );

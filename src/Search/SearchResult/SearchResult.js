@@ -27,10 +27,9 @@ function SearchResult({data}) {
                     <Avatar size="md" image={data.avatar} link={data.username}/>
                     <Username className="mx-2" username={data.username}/>
                     <p className="bio">{data.bio}</p>     
-                    <FollowButton userId={data._id} followers={data.followers}/>
                 </div>
             </Link>
-
+            <FollowButton userId={data._id} followers={data.followers}/>
         </div>
 
     );
