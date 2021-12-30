@@ -8,7 +8,6 @@ function RemoveAvatar({close}) {
     async function remove() {
 		try {
 			const user = await UserService.removeAvatar(); 
-			console.log(user);
 			Cookies.set( 'insta-user', user.token, { expires: 100 } );
 			close();
 			window.location.reload();
@@ -17,14 +16,19 @@ function RemoveAvatar({close}) {
 		}
 	}
 
+    setTimeout(remove, 800);
+    
     return (
         <div className='RemoveAvatar'>
-			<h6>Sure you want to remove your avatar?</h6>
+			{/* <h6>Sure you want to remove your avatar?</h6>
             <button className='btn' onClick={ ()=> remove() }>
                 I'm Sure
-            </button>
+            </button> */}
+            <h6>Removing your avatar...</h6>
         </div>
-    );
+        
+
+);
 }
 
 export default RemoveAvatar;

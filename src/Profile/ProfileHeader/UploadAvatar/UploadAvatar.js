@@ -6,12 +6,12 @@ import { BsUpload } from 'react-icons/bs';
 import Cookies from 'js-cookie';
 import Popup from 'reactjs-popup';
 import { uploadAvatarSchema } from './uploadAvatar.schem'
-import environment from '../../../environments/index';
 import { UserService } from '../../../services/user.service';
 import { UserContext } from '../../../user-context';
 import RemoveAvatar from './RemoveAvatar/RemoveAvatar';
 import avatarDefault from '../../../common/Avatar/avatar.png';
 import { isMobile } from 'react-device-detect';
+import PreviewGallery from './PreviewGallery/PreviewGallery';
 
 
 function UploadAvatar({close,posts}) {
@@ -20,7 +20,6 @@ function UploadAvatar({close,posts}) {
 	const [selectedFile, setSelectedFile] = useState();
 	const [selectedPost, setSelectedPost] = useState();
     const [preview, setPreview] = useState(user.avatar);
-	
 	useEffect(() => {
 
         if (!selectedFile && !selectedPost) {
@@ -50,25 +49,31 @@ function UploadAvatar({close,posts}) {
 	}
 
 	async function submit(values) {
-		const data = new FormData();
-		data.append('image',values.image);
 
-		try {
-			const res = await fetch (environment.apiUrl +'/user/avatar', {
-				method:'POST',
-				body:data,
-				headers: {
-					Authorization: UserService.getToken(),
+		if (typeof selectedFile ==='object') { 
+			const data = new FormData();
+			data.append('image',values.image);
+
+				try {
+					const user = await UserService.uploadAvatar(data); 
+					Cookies.set('insta-user', user.token, { expires: 100 });
+				}catch(err){
+					console.log(err);
 				}
-			})
-			const json = await res.json();
-			Cookies.set('insta-user', json.token, { expires: 100 });
+		} else {
+				try {
+					const user = await UserService.replaceAvatar(selectedPost); 
+					Cookies.set('insta-user', user.token, { expires: 100 });
+				}catch(err){
+					console.log(err);
+				}
+		}
+		
+		try {
 			const updatedUser = await UserService.me();
 			setUser(updatedUser);
 			close();
 			window.location.reload();
-			// history.push('/profile/' + user.username);
-
 		}catch(err){
 			console.log(err);
 		}
@@ -79,21 +84,10 @@ function UploadAvatar({close,posts}) {
 		<div className="UploadAvatar">
 				<h4>Choose a new avatar</h4>
 				<div className="form-wrapper">
-					<div className="gallery">
-						{
-							posts.map(post => {
-								return <img className="image"
-											key={ post._id }
-											src={ post.image }
-											alt={ post.user.username +"'s post" }
-											onClick={() => postClicked(post.image) } />
-							})
-						}
-					</div>
-
+					<PreviewGallery posts={posts} postClicked={postClicked}/>
 					<Formik
 						initialValues={initialValues}
-						validationSchema={uploadAvatarSchema}
+						// validationSchema={uploadAvatarSchema}
 						onSubmit ={submit}>
 						{({ setFieldValue , isSubmitting })=> (
 							<Form className="form">

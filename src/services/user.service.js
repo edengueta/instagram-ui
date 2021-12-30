@@ -88,6 +88,29 @@ export class UserService {
 		return res.json();
 	}
 
+	static async uploadAvatar(data){
+		const res = await fetch (environment.apiUrl + '/user/avatar', {
+            method: 'POST',
+			body:data,
+			headers: {
+                 Authorization: UserService.getToken(),
+			}
+		});
+		return res.json();
+	}
+	static async replaceAvatar(image){
+		const res = await fetch (environment.apiUrl + '/user/avatar/replace', {
+            method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+                 Authorization: UserService.getToken(),
+			},
+			body: JSON.stringify({
+                image
+            }),
+		});
+		return res.json();
+	}
 	static async removeAvatar(){
 		const res = await fetch (environment.apiUrl + '/user/avatar/remove', {
             method: 'POST',

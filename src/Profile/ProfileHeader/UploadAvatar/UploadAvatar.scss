@@ -20,37 +20,6 @@
         display: none;
     }
 
-    .gallery {
-
-        display: grid;
-        grid-template-columns: repeat( 5 , 1fr );
-        grid-gap: 0.5rem;
-        max-width: 250px;
-        margin: 20px 0;
-        padding-bottom: 10px;
-        overflow-x: scroll;
-
-        &::-webkit-scrollbar {
-            background-color: rgb(175, 175, 175);
-            border-radius: 20px;
-            height: 6px; 
-
-        }
-        &::-webkit-scrollbar-thumb {
-            background: #dbdbdb;
-            border-radius: 20px;
-            width: 30px;
-            height: 30px;
-        }
-
-
-        .image {
-            width: 70px;
-            border: #eee 1px solid;
-            border-radius: 50%;
-        }
-    }
-
     .form{
         display: flex;
         flex-direction: column;
