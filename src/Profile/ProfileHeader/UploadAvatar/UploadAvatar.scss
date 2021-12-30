@@ -9,10 +9,9 @@
         position: relative;
         display: flex;
         flex-direction: column;
-
         align-items: center;    
     }
-    h4{
+    h5{
         margin-top: 20px;
         text-align: center;
     }
@@ -43,14 +42,13 @@
             z-index: 3;
 
             @media (max-width: 425px) {
-                left: 3%;
-                top:3%;
+                left: 8%;
+                top:8%;
             }
             @media (max-width: 325px) {
-
-                font-size: 20px;
-                width: 30px;
-                height: 30px;
+                font-size: 23px;
+                width: 33px;
+                height: 33px;
             }
 
             &:hover, &:focus {
@@ -64,7 +62,6 @@
 
         .image-upload {
             border: 1px solid #ccc;
-            display: inline-block;
             padding: 6px 12px;
             cursor: pointer;
             width: 250px;
@@ -76,15 +73,12 @@
             overflow: hidden;
             transition: all 0.3s ease-in-out;
 
+            // @media (max-width: 425px) {
+            //     font-size: 4rem;
+            // }
 
             .upload-icon {
-                transition: all 0.3s ease-in-out;
-                color: #ccc;
-
-                &:hover {
-                    opacity: 0.5;
-
-                }
+                color: black;
             }
 
             .preview{
@@ -99,8 +93,13 @@
                 width: 100%; 
                 transition: all 0.3s ease-in-out;
 
+
+
                 &:hover {
-                   opacity: 0.5;
+                   opacity: 0.3;
+                   @media (max-width: 425px) {
+                        opacity: 1;
+                    }
                 }
             }
         }
@@ -124,9 +123,6 @@
             border: 3px solid white;
             color: white;
             transition: all 0.3s ease-in-out;
-            // position: absolute;
-            // bottom:0px;
-            // right: 0;
             font-size: 15px;
 
             &:hover {

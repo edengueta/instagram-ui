@@ -112,6 +112,9 @@ function UploadAvatar({close,posts}) {
 											/>
 											<BsUpload className="update-icon"/>
 										</label>
+										{isMobile &&
+											<p>Tap on the avatar to upload a new one</p>
+										}
 										
 										<input
 											type="file"
